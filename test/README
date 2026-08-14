@@ -1,0 +1,126 @@
+# 🚗⚡ IoT-Based EV Battery Management & Thermal Runaway Protection System
+
+<p align="center">
+
+  <h2 align="center">🔋 Smart EV Battery Thermal Management System</h2>
+
+  <p align="center">
+    <b>ESP32 • Embedded C++ • BMS • EV Thermal Management • IoT • Wokwi • Telegram</b>
+  </p>
+
+  <p align="center">
+    A real-time embedded simulation for monitoring EV battery temperature,
+    controlling thermal protection, detecting rapid temperature rise,
+    and delivering remote safety alerts.
+  </p>
+
+</p>
+
+---
+
+## 🌟 Project Overview
+
+Electric vehicle battery packs require continuous thermal monitoring to maintain
+safe operating conditions and prevent potentially dangerous overheating.
+
+This project implements a **software-defined EV Battery Management System (BMS)
+thermal monitoring and protection layer** using an ESP32.
+
+The system continuously monitors battery temperature through a simulated DHT22
+temperature sensor, evaluates thermal conditions using threshold-based logic,
+activates a simulated cooling system, detects rapid temperature rise, and sends
+real-time safety notifications through Telegram.
+
+> ⚠️ **Simulation Note:** The DHT22 represents a battery temperature sensor and
+> the LED represents the activation state of an EV cooling system. The project
+> does not control a real liquid-cooling pump or battery pack.
+
+---
+
+## 🎯 Key Objectives
+
+- 🔋 Simulate EV battery thermal monitoring
+- 🌡️ Continuously measure battery temperature
+- 🧠 Implement BMS thermal decision logic
+- ❄️ Automatically activate simulated cooling
+- 🚨 Detect critical thermal conditions
+- ⚡ Detect rapid temperature rise using dT/dt
+- 📱 Send real-time Telegram safety alerts
+- 📡 Demonstrate Wi-Fi-enabled EV monitoring
+- 🧪 Validate the embedded system through Wokwi simulation
+- 🛠️ Develop and build firmware using PlatformIO
+
+---
+
+## ✨ Key Features
+
+| Feature | Description |
+|---|---|
+| 🌡️ Temperature Monitoring | Real-time DHT22 temperature acquisition |
+| 🧠 BMS Logic | Multi-level battery thermal state classification |
+| ❄️ Cooling Control | Automatic cooling activation above safe temperature |
+| ⚠️ Warning Detection | Detects elevated battery temperature |
+| 🔴 Critical Protection | Identifies critical thermal conditions |
+| ⚡ dT/dt Detection | Detects rapid temperature rise |
+| 📱 Telegram Alerts | Remote warning and critical notifications |
+| 📡 Wi-Fi Connectivity | ESP32-based wireless communication |
+| 🖥️ Serial Monitoring | Real-time system diagnostics |
+| 🧪 Wokwi Simulation | Hardware behavior simulation |
+| 🔧 PlatformIO | Embedded firmware development and build system |
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                         🔋 EV BATTERY
+                              │
+                              │ Thermal Data
+                              ▼
+                     ┌─────────────────┐
+                     │     DHT22       │
+                     │ Temperature     │
+                     │     Sensor      │
+                     └────────┬────────┘
+                              │
+                              │ GPIO 15
+                              ▼
+                    ┌───────────────────┐
+                    │       ESP32       │
+                    │                   │
+                    │  BMS Thermal      │
+                    │  Decision Engine  │
+                    └─────────┬─────────┘
+                              │
+              ┌───────────────┼────────────────┐
+              │               │                │
+              ▼               ▼                ▼
+        🌡️ Temperature    ⚡ dT/dt        ❄️ Cooling
+           Analysis       Analysis         Control
+              │               │                │
+              │               │                ▼
+              │               │          Cooling LED
+              │               │          (Simulation)
+              │               │
+              └───────────────┤
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │   Thermal State   │
+                    │    Classifier     │
+                    └─────────┬─────────┘
+                              │
+             ┌────────────────┼────────────────┐
+             │                │                │
+             ▼                ▼                ▼
+        🟢 NORMAL        🟡 WARNING       🔴 CRITICAL
+             │                │                │
+             │                │                │
+        Cooling OFF      Cooling ON       Emergency
+                                             Cooling ON
+             │                │                │
+             └────────────────┼────────────────┘
+                              │
+                              ▼
+                     📱 TELEGRAM ALERT
+                       Remote Monitoring
